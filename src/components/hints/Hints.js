@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addHintAction, selectHintAction } from '../../redux/actions/hintActions';
+import { addHintAction } from '../../redux/actions/hintActions';
+import Hint from './Hint';
 
 export default function Hints() {
   const dispatch = useDispatch();
@@ -11,8 +12,6 @@ export default function Hints() {
     word: '',
     count: ''
   });
-
-  console.log(hints)
 
   const handleChange = e => {
     setHint({
@@ -30,12 +29,8 @@ export default function Hints() {
     });
   };
 
-  const selectHint = id => dispatch(selectHintAction(id));
-
   const hintList = hints?.map(hint => 
-    <div key={hint.id} onClick={() => selectHint(hint.id)}>
-      {hint.word} -- {hint.count}
-    </div>
+    <Hint key={hint.id} hint={hint} />
   ).reverse();
 
   return (
