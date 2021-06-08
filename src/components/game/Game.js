@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import Card from '../card';
+import Hints from '../hints';
 
 const chunk = (list, n) => {
   const chunkedList = []
@@ -32,6 +33,7 @@ const Game = () => {
   return (
     <div>
       <div>Codenames</div>
+      <Hints />
       {cards}
     </div>
   )
