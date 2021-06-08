@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addHintAction } from '../../redux/actions/hintActions';
+import { addHintAction, selectHintAction } from '../../redux/actions/hintActions';
 
 export default function Hints() {
   const dispatch = useDispatch();
 
+  const [color, setColor] = useState('red');
   const { hints } = useSelector(state => state.hintReducer)
   const [hint, setHint] = useState({
     word: '',
     count: ''
   });
+
+  console.log(hints)
 
   const handleChange = e => {
     setHint({
@@ -20,15 +23,17 @@ export default function Hints() {
 
   const submitHint = e => {
     e.preventDefault();
-    dispatch(addHintAction(hint.word, hint.count, hints));
+    dispatch(addHintAction(hint.word, hint.count, hints, color));
     setHint({
       word: '',
       count: ''
     });
   };
 
-  const hintsList = hints?.map((hint, i) => 
-    <div key={i}>
+  const selectHint = id => dispatch(selectHintAction(id));
+
+  const hintList = hints?.map(hint => 
+    <div key={hint.id} onClick={() => selectHint(hint.id)}>
       {hint.word} -- {hint.count}
     </div>
   ).reverse();
@@ -53,8 +58,9 @@ export default function Hints() {
       </form>
       
       <div>
-        {hintsList}
+        {hintList}
       </div>
+
     </div>
   );
 };

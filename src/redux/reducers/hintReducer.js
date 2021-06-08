@@ -1,7 +1,10 @@
-import { ADD_HINT } from '../types';
+import { 
+  ADD_HINT, SELECT_HINT, GUESS_HINT
+} from '../types';
 
 const INITIAL_STATE = {
-  hints: []
+  hints: [], 
+  selectedHint: ""
 };
 
 const hintReducer = (state = INITIAL_STATE, action) => {
@@ -10,9 +13,19 @@ const hintReducer = (state = INITIAL_STATE, action) => {
     case ADD_HINT:
       return {
         ...state, 
-        hints: payload.newHints
+        hints: payload.newHints, 
+        selectedHint: payload.selectedHint
       };
-
+    case SELECT_HINT:
+      return {
+        ...state,
+        selectedHint: payload.id
+      };
+    case GUESS_HINT:
+      return {
+        ...state,
+        hints: payload.newHints
+      }
     default:
       return state;
   };
