@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addHintAction } from '../../redux/actions/hintActions';
+import { addHintAction, saveHintsAction } from '../../redux/actions/hintActions';
 import Hint from './Hint';
 
 export default function Hints() {
   const dispatch = useDispatch();
 
-  const [color, setColor] = useState('red');
-  const { hints } = useSelector(state => state.hintReducer)
+  const { hints, currTeam } = useSelector(state => state.hintReducer)
   const [hint, setHint] = useState({
     word: '',
     count: ''
@@ -22,12 +21,15 @@ export default function Hints() {
 
   const submitHint = e => {
     e.preventDefault();
-    dispatch(addHintAction(hint.word, hint.count, hints, color));
+    dispatch(addHintAction(hint.word, hint.count, hints, currTeam));
     setHint({
       word: '',
       count: ''
     });
   };
+
+  const saveHints = () => dispatch(saveHintsAction(currTeam));
+  
 
   const hintList = hints?.map(hint => 
     <Hint key={hint.id} hint={hint} />
@@ -55,6 +57,7 @@ export default function Hints() {
       <div>
         {hintList}
       </div>
+      <button onClick={saveHints}>Done</button>
 
     </div>
   );

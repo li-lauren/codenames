@@ -7,11 +7,11 @@ const Card = ({card}) => {
   const color = card.color;
   const [selected, setSelected] = useState(false);
   
-  const { hints, selectedHint } = useSelector(state => state.hintReducer);
+  const { hints, selectedHint, currTeam } = useSelector(state => state.hintReducer);
   const dispatch = useDispatch();
 
   const selectCard = () => {
-    dispatch(guessHintAction(selectedHint, hints));
+    dispatch(guessHintAction(selectedHint, hints, currTeam));
     setSelected(true);
   };
 
@@ -22,7 +22,7 @@ const Card = ({card}) => {
     >
       <div>{card.word}</div>
     </div>
-  )
+  );
 };
 
 export default Card;
