@@ -36,8 +36,9 @@ const checkTeamStatus = (currTeam, hints) => {
   return availableHints.length === 0;
 }
 
-export const guessHintAction = (id, hints, currTeam) => {
-  const newHints = updateHints(id, hints);
+export const guessHintAction = (data) => {
+  const {selectedHint, hints, currTeam, newSelectedCards} = data;
+  const newHints = updateHints(selectedHint, hints);
   const switchTeam = checkTeamStatus(currTeam, newHints);
  
   if (switchTeam) {
@@ -46,7 +47,8 @@ export const guessHintAction = (id, hints, currTeam) => {
       payload: { 
         newHints,
         currTeam: currTeam === "red" ? "blue" : "red", 
-        currRole: "hinter"
+        currRole: "hinter", 
+        newSelectedCards
       }
     };
   } else {
@@ -55,7 +57,8 @@ export const guessHintAction = (id, hints, currTeam) => {
       payload: { 
         newHints, 
         currTeam,
-        currRole: "guesser"
+        currRole: "guesser", 
+        newSelectedCards
       } 
     };
   };

@@ -27,6 +27,14 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
+
+  socket.on('event://submitHint', data => {
+    socket.broadcast.emit('event://getHint', data);
+  });
+
+  socket.on('event://selectCard', data => {
+    socket.broadcast.emit('event://getSelectedCard', data);
+  });
 });
 
 const PORT = process.env.PORT || 8080;

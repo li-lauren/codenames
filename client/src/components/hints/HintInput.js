@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addHintAction } from '../../redux/actions/hintActions';
+import { WebSocketContext } from '../../WebSocket';
 
 export default function HintInput() {
-  const dispatch = useDispatch();
+  const ws = useContext(WebSocketContext);
+  // const dispatch = useDispatch();
   const { hints, currTeam } = useSelector(state => state.hintReducer);
 
   const [hint, setHint] = useState({
@@ -20,7 +22,8 @@ export default function HintInput() {
 
   const submitHint = e => {
     e.preventDefault();
-    dispatch(addHintAction(hint.word, hint.count, hints, currTeam));
+    ws.submitHint(hint.word, hint.count, hints, currTeam);
+    // dispatch(addHintAction(hint.word, hint.count, hints, currTeam));
     setHint({
       word: '',
       count: ''

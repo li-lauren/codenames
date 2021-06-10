@@ -6,7 +6,8 @@ const INITIAL_STATE = {
   hints: [], 
   selectedHint: "", 
   currTeam: "red",
-  currRole: "hinter"
+  currRole: "hinter", 
+  selectedCards: []
 };
 
 const hintReducer = (state = INITIAL_STATE, action) => {
@@ -29,7 +30,8 @@ const hintReducer = (state = INITIAL_STATE, action) => {
         ...state,
         hints: payload.newHints, 
         currTeam: payload.currTeam,
-        currRole: payload.currRole
+        currRole: payload.currRole, 
+        selectedCards: payload.newSelectedCards
       };
     case SAVE_HINTS:
       return {
