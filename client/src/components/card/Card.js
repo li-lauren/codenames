@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { WebSocketContext } from '../../WebSocket';
 import './Card.css'
 
-const Card = ({card}) => {
+const Card = ({card, hinterUI}) => {
   const ws = useContext(WebSocketContext);
   const color = card.color;
   const cardId = card.id;
@@ -19,9 +19,16 @@ const Card = ({card}) => {
     ws.selectCard(payload);
   };
 
+  let cardClass;
+  if (hinterUI) {
+    cardClass = `card hinter-${color}`
+  } else {
+    cardClass = "card " + (selectedCards.includes(cardId) ? color : "")
+  }
+  
   return (
     <div 
-      className={"card " + (selectedCards.includes(cardId) ? color : "")} 
+      className={cardClass} 
       onClick={selectCard}
     >
       <div>{card.word}</div>

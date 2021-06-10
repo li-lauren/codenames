@@ -1,44 +1,19 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
-import Card from '../card';
+import CardDisplay from '../card';
 import Hints from '../hints';
 
-const chunk = (list, n) => {
-  const chunkedList = []
-  
-  let i = 0;
-  while (i <= list.length) {
-    chunkedList.push(list.slice(i, i + n));
-    i = i + n;
-  };
-
-  return chunkedList;
-}
-
 const Game = () => {
-  const n = 3;
   // const { currTeam, currRole } = useSelector((state) => state.hintReducer);
-  // console.log(currTeam, currRole)
-  const { cardLayout } = useSelector((state) => state.cardLayoutReducer);
-
-  const cardLayoutRows = chunk(cardLayout, n);
-
-  const cards = cardLayoutRows.map((row, i) => 
-    <div key={i}>
-      {row.map(card => 
-        <Card key={card.id} card={card} />
-      )}
-    </div>
-  );
+  // console.log(currTeam, currRole);
 
   return (
     <div>
       <div>Codenames</div>
       <Hints />
-      {cards}
+      <CardDisplay hinterUI={false} />
     </div>
-  )
-}
+  );
+};
 
 export default Game;
