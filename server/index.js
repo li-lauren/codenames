@@ -17,10 +17,6 @@ const router = require('./router');
 // app.use(cors());
 app.use(router);
 
-// app.get('/', (req, res) => {
-//   res.sendFile(__dirname + '/index.html');
-// });
-
 io.on('connection', (socket) => {
   console.log('a user connected' + socket.id);
   
@@ -32,8 +28,16 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('event://getHint', data);
   });
 
+  socket.on('event://selectHint', data => {
+    socket.broadcast.emit('event://getSelectedHint', data);
+  });
+
   socket.on('event://selectCard', data => {
     socket.broadcast.emit('event://getSelectedCard', data);
+  });
+
+  socket.on('event://saveHints', data => {
+    socket.broadcast.emit('event://getSavedHints', data);
   });
 });
 

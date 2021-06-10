@@ -1,4 +1,3 @@
-const words = ['']
 const INITIAL_STATE = {
   cardLayout: [
     {"id": 1, "word": "AMBULANCE", "color": "red"},
@@ -14,7 +13,7 @@ const INITIAL_STATE = {
 };
 
 const cardLayoutReducer = (state = INITIAL_STATE, action) => {
-  const { type, payload } = action;
+  const { type } = action;
   switch (type) {
     default:
       return state

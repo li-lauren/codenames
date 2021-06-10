@@ -1,15 +1,15 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { saveHintsAction } from '../../redux/actions/hintActions';
+import React, { useContext } from 'react';
+import { useSelector } from 'react-redux';
 import HintLists from './HintLists';
 import HintInput from './HintInput';
+import { WebSocketContext } from '../../WebSocket';
 
 export default function Hints() {
-  const dispatch = useDispatch();
+  const ws = useContext(WebSocketContext);
 
   const { currTeam, currRole } = useSelector(state => state.hintReducer);
   
-  const saveHints = () => dispatch(saveHintsAction(currTeam));
+  const saveHints = () => ws.saveHints(currTeam);
 
   return (
     <div>

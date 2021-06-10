@@ -1,14 +1,14 @@
-import React from 'react'
-import { useDispatch } from 'react-redux';
-import { selectHintAction } from '../../redux/actions/hintActions';
+import React, { useContext } from 'react';
+import { WebSocketContext } from '../../WebSocket';
 
 export default function Hint({hint}) {
-  const dispatch = useDispatch();
-  const selectHint = id => dispatch(selectHintAction(id));
+  const ws = useContext(WebSocketContext);
+
+  const selectHint = id => ws.selectHint(id);
   
   return (
     <div onClick={() => selectHint(hint.id)}>
       {hint.word} -- {hint.count}
     </div>
-  )
-}
+  );
+};

@@ -18,7 +18,7 @@ const chunk = (list, n) => {
 
 const Game = () => {
   const n = 3;
-  const { currTeam, currRole } = useSelector((state) => state.hintReducer);
+  // const { currTeam, currRole } = useSelector((state) => state.hintReducer);
   // console.log(currTeam, currRole)
   const { cardLayout } = useSelector((state) => state.cardLayoutReducer);
 

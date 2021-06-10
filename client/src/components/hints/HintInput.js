@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addHintAction } from '../../redux/actions/hintActions';
+import { useSelector } from 'react-redux';
 import { WebSocketContext } from '../../WebSocket';
 
 export default function HintInput() {
