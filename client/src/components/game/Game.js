@@ -2,6 +2,7 @@ import React from 'react';
 
 import CardDisplay from '../card';
 import Hints from '../hints';
+import Join from '../join';
 
 const Game = () => {
   // const { currTeam, currRole } = useSelector((state) => state.hintReducer);
@@ -10,6 +11,7 @@ const Game = () => {
   return (
     <div>
       <div>Codenames</div>
+      <Join />
       <Hints />
       <CardDisplay hinterUI={false} />
     </div>
